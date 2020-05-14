@@ -35,6 +35,8 @@ class Movie extends React.Component {
     const posterSrc =
       poster === null ? null : "http://image.tmdb.org/t/p/w185" + poster;
 
+    function showReview() {}
+
     return (
       <div>
         <div className="movie_detail_header">
@@ -48,9 +50,21 @@ class Movie extends React.Component {
             <p>{date}</p>
 
             <button>Movie Note</button>
-            <button>Review</button>
+            <button onClick="showReview()">Review</button>
           </div>
         </div>
+
+        <div className="reviewPage">
+          <header>
+            <div className="reviewCancel">취소</div>
+            <button class="reviewSave">저장</button>
+            <em> {title}</em>
+          </header>
+          <div className="reviewTextarea">
+            <textarea placeholder="리뷰 작성"></textarea>
+          </div>
+        </div>
+
         <div className="movie_detail_contents">
           <section className="overview">
             <h3 className="section_header">Overview</h3>

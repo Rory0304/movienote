@@ -29,6 +29,53 @@
   margin: 2px 5px 2px 2px;
 }
 
+.reviewPage {
+  width: 640px;
+  height: auto;
+  min-height: 500px;
+  margin: auto;
+  border: 1px solid #d8d4d4;
+  border-radius: 20px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.reviewCancel {
+  float: left;
+  margin: 5px;
+}
+
+.reviewPage header {
+  padding: 5px;
+  border-bottom: solid 1px #d8d4d4;
+}
+
+.reviewPage header em {
+  font-weight: bold;
+  font-size: 23px;
+}
+
+.reviewTextarea {
+  margin: 0 20px;
+}
+
+.reviewPage textarea {
+  width: 100%;
+  background-color: white;
+  border: none;
+  resize: none;
+  overflow: auto;
+  outline: none;
+  min-height: 500px;
+  font-size: 17px;
+  letter-spacing: -0.7px;
+  line-height: 27px;
+}
+
+.reviewSave {
+  float: right;
+}
+
 .movie_detail_contents {
   padding: 10px;
   width: 80%;
@@ -42,6 +89,7 @@
 }
 
 .casts {
+  width: 100%;
   display: inline-flex;
   justify-content: space-between;
   overflow-x: auto;
