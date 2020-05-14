@@ -1,60 +1,57 @@
-.movie-header {
-  height: 200px;
-  padding: 50px;
+.react-container {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.header {
+  position: relative;
+  height: 70px;
+  width: 100%;
+  margin: 0 auto;
+  line-height: 66px;
+  text-align: center;
+  box-sizing: border-box;
   border-bottom: 1px solid #d8d4d4;
 }
 
-.movie-contents-wrap {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+.searchbar {
+  position: absolute;
+  left: 80px;
+  top: 38%;
 }
 
-.movie-contents {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-}
-
-.movie-list {
-  width: 20%;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  overflow: hidden;
-  margin-left: 30px;
-  margin-top: 30px;
-}
-
-.movie-info {
-  width: 50%;
-  white-space: normal;
-  flex-wrap: wrap;
-  padding: 20px 10px 12px 10px;
-}
-
-.movie-info h3 {
-  width: 100%;
-  word-wrap: normal;
-
-  overflow-wrap: break-word;
+.header h1 {
   margin: 0;
+  display: inline-block;
 }
 
-.movie-footer {
-  clear: both;
-  text-align: center;
-  margin: 20px;
-  border: 1px solid rgb(212, 211, 211);
+#header_logo {
+  position: absolute;
+  top: 12%;
+  left: 0;
+  margin: 10px;
 }
 
-.movie-footer button {
-  width: 300px;
-  height: 35px;
-  background-color: #fdfdfd;
-  border-style: none;
+.submenu {
+  position: absolute;
+  top: 90px;
+  left: 0px;
+  display: none;
+}
+
+.submenu ul li {
+  list-style: none;
+}
+
+.userinfo {
+  position: absolute;
+  right: 2%;
+  top: 0;
+}
+
+.userinfo button {
+  margin-right: 10px;
 }
 
 .footer {
@@ -64,4 +61,5 @@
   padding: 50px;
   box-sizing: border-box;
   text-align: center;
+  clear: both;
 }

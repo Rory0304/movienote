@@ -1,0 +1,74 @@
+.movie_detail_header {
+  height: 400px;
+  position: relative;
+}
+
+.poster {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  box-shadow: 8px 8px 9px 5px #d1cfcf;
+}
+
+.header_info {
+  position: absolute;
+  top: 15%;
+  right: 10%;
+  width: 700px;
+}
+
+.header_info button {
+  background-color: #f8bf00;
+  color: white;
+  border: none;
+  font-weight: bold;
+  font-size: 15px;
+  width: 120px;
+  height: 45px;
+  padding: 5px;
+  margin: 2px 5px 2px 2px;
+}
+
+.movie_detail_contents {
+  padding: 10px;
+  width: 80%;
+  margin: auto;
+}
+
+.section_header {
+  margin: 0;
+  color: #f8bf00;
+  font-size: 28px;
+}
+
+.casts {
+  display: inline-flex;
+  justify-content: space-between;
+  overflow-x: auto;
+  margin-top: 14px;
+}
+
+.cast {
+  width: 140px;
+  margin: 4px;
+}
+
+.profile_null {
+  width: 138px;
+  height: 175px;
+  background-color: #d1cfcf;
+  background-image: url("../assets/icons8-person-90.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.cast_name {
+  font-weight: bold;
+}
+
+.cast_character {
+  font-weight: lighter;
+}
+
+.review {
+  clear: both;
+}

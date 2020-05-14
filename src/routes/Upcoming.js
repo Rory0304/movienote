@@ -1,7 +1,6 @@
 import React from "react";
 import MovieList from "../components/MovieList";
 import Axios from "axios";
-import "./common.css";
 
 class Upcoming extends React.Component {
   constructor(props) {
@@ -39,14 +38,11 @@ class Upcoming extends React.Component {
 
     return (
       <div>
-        <div className="movie-header">
+        <div className="movie_header">
           <h2>Now Playing</h2>
           <input className="searching" />
         </div>
         {isloading ? <div>loading</div> : <GetEachMovie db={db} />}
-        <div className="movie-footer">
-          <button>load more</button>
-        </div>
       </div>
     );
   }
@@ -54,8 +50,8 @@ class Upcoming extends React.Component {
 
 function GetEachMovie({ db }) {
   return (
-    <div className="movie-contents-wrap">
-      <div className="movie-contents">
+    <div className="movie_wrapper">
+      <div className="movie_lists">
         {db.results.map((movie) => (
           <MovieList
             id={movie.id}
@@ -63,10 +59,13 @@ function GetEachMovie({ db }) {
             key={movie.id}
             date={movie.release_date}
             overview={movie.overview}
-            poster={"http://image.tmdb.org/t/p/w185" + movie.poster_path}
+            poster={movie.poster_path}
             page={db.page}
           />
         ))}
+      </div>
+      <div className="movie_load">
+        <button>load more</button>
       </div>
     </div>
   );

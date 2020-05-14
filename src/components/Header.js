@@ -1,11 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./header.css";
 import logo from "../assets/list-32.png";
 function Header() {
   return (
     <div className="header">
-      <img src={logo} alt="list-logo" id="header-logo" />
+      <img src={logo} alt="list-logo" id="header_logo" />
       <input className="searchbar" />
       <Link to="/home">
         <h1>Movie Note</h1>
