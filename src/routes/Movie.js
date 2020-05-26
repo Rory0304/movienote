@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import Review from "../components/Review";
 import Axios from "axios";
 import "./Movie.css";
+import MovieReviewSample from "./MovieReviewSample.js";
 
 class Movie extends React.Component {
   constructor(props) {
@@ -15,8 +16,19 @@ class Movie extends React.Component {
       date: props.location.state.date,
       overview: props.location.state.overview,
       casts: [],
+      value: ''
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+  handleSubmit(event) {
+    /* 원래는 디비로 전송, 페이지 새로고침 */
+ }
 
   componentDidMount() {
     this.getMovieCasts();
@@ -54,16 +66,16 @@ class Movie extends React.Component {
           </div>
         </div>
 
-        <div className="reviewPage">
+        <form className="reviewPage" onSubmit={this.handleSubmit}>
           <header>
             <div className="reviewCancel">취소</div>
-            <button class="reviewSave">저장</button>
+            <input type="submit" value="저장" class="reviewSave" />
             <em> {title}</em>
           </header>
           <div className="reviewTextarea">
-            <textarea placeholder="리뷰 작성"></textarea>
+            <textarea value={this.state.value} onChange={this.handleChange} placeholder="리뷰 작성"></textarea>
           </div>
-        </div>
+        </form>
 
         <div className="movie_detail_contents">
           <section className="overview">
@@ -89,7 +101,9 @@ class Movie extends React.Component {
 
           <section className="Review">
             <h3 className="section_header">Review</h3>
-            <Review></Review>
+            <div>
+              <MovieReviewSample />
+            </div>
           </section>
         </div>
       </div>

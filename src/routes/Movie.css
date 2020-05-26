@@ -59,14 +59,14 @@
   margin: 0 20px;
 }
 
-.reviewPage textarea {
+.reviewPage textarea, .reviewName {
   width: 100%;
   background-color: white;
-  border: none;
+  min-height: 500px;
   resize: none;
   overflow: auto;
   outline: none;
-  min-height: 500px;
+  border: none;
   font-size: 17px;
   letter-spacing: -0.7px;
   line-height: 27px;
@@ -119,4 +119,12 @@
 
 .review {
   clear: both;
+}
+
+.ReviewData {
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 40%;
+  float: left;
+  margin: 5px;
+  padding: 10px;
 }
