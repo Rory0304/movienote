@@ -1,5 +1,5 @@
 import React from "react";
-import MovieList from "../components/MovieList";
+import MovieList from "./MovieList";
 import Axios from "axios";
 
 class Upcoming extends React.Component {

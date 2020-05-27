@@ -1,0 +1,58 @@
+.popular_area{
+    display: flex;
+}
+
+.nowplaying_area{
+    display: flex;
+}
+
+.upcoming_area{
+    position: relative;
+}
+
+.upcoming_movies{
+    overflow: hidden;
+    width: 650px;
+    height: 400px;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+.upcoming_movies_carousel{
+    display: flex;
+}
+
+.upcoming_movie{
+    display: flex;
+}
+
+.upcoming_movie img{
+    width: 185px;
+    height: 278px;
+}
+
+.upcoming_movie section{
+    width: 465px;
+    height: 400px;
+}
+
+.arrow{
+    padding: 40px 10px;
+    background-color: #8080807d;
+    color: white;
+    position: absolute;
+    top:50%;
+    z-index: 1;
+}
+
+.left{
+    left: 5%;
+}
+
+.right{
+    right: 5%;
+}
+
+.arrow:hover{
+    background-color: #808080bd;
+}

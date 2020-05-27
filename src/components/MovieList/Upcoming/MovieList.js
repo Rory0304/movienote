@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Movie from "../routes/Movie";
+import Movie from "../../Movie/Movie";
 
 function MovieList({ title, date, poster, id, overview, rating }) {
   const link = {

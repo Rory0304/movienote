@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 // import { render } from "@testing-library/react";
-import Review from "../components/Review";
+import Review from "../Review/Review";
 import Axios from "axios";
 import "./Movie.css";
 import MovieReviewSample from "./MovieReviewSample.js";
@@ -27,7 +27,6 @@ class Movie extends React.Component {
     this.setState({value: event.target.value});
   }
   handleSubmit(event) {
-    /* 원래는 디비로 전송, 페이지 새로고침 */
  }
 
   componentDidMount() {
@@ -35,11 +34,13 @@ class Movie extends React.Component {
   }
 
   getMovieCasts = async (id = this.state.id) => {
-    const cast_url = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=b1306395631dc84cde154096963c13db`;
-    const { data } = await Axios.get(cast_url);
-    this.setState({
-      casts: data.cast,
-    });
+
+    try{
+      const cast_url = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=b1306395631dc84cde154096963c13db`;
+      await Axios.get(cast_url).then(res => this.setState({casts : res.cast}));
+    }catch(e){
+      return e;
+    }
   };
 
   render() {
