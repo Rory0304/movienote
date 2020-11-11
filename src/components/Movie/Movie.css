@@ -3,18 +3,31 @@
   position: relative;
 }
 
+.header_backdrop{
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: top 20% left 0;
+  opacity: 0.8;
+  z-index: -999;
+}
+
 .poster {
   position: absolute;
   top: 15%;
   left: 15%;
-  box-shadow: 8px 8px 9px 5px #d1cfcf;
+  box-shadow: 9px 9px 17px 4px #272727a8;
 }
 
 .header_info {
   position: absolute;
   top: 15%;
-  right: 10%;
-  width: 700px;
+  right: 0;
+  width: 800px;
+  height: 200px;
+  padding: 20px;
+  background-color:#ffffffb8;
 }
 
 .header_info button {
@@ -119,6 +132,10 @@
 
 .review {
   clear: both;
+}
+
+.reviewPage{
+  display: none;
 }
 
 .ReviewData {
