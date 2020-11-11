@@ -2,20 +2,89 @@
     display: flex;
 }
 
-.nowplaying_area{
+.nowplaying_area, .upcoming_area{
+    position: relative;
+    margin: 25px;
+}
+
+.nowplaying_area h2, .upcoming_area h2{
+    color:  #f8bf00;
+    padding: 10px;
+}
+
+.nowplaying_movies{
+    width: 910px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.nowplaying_movies_carousel{
+    margin: 5px;
     display: flex;
 }
 
-.upcoming_area{
-    position: relative;
+.nowplaying_movie{
+    background-repeat: no-repeat;
+    height: 278px;
+    width: 185px;
+    display: table;
+    table-layout: fixed;
+    margin: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.nowplaying_movie:hover{
+    animation-duration: 1ms;
+    transition: 0.3s ease;
+    transform: translateY(-8%);
+    -webkit-transform: translateY(-8%);
+    -moz-transform: translateY(-8%);
+    -o-transform: translateY(-8%);
+    box-shadow: 0px 11px 8px 0px #808080bd;
+}
+
+.nowplaying_movie:hover .nowplaying_movie_info{
+    opacity: 1;
+    z-index: 1;
+    background-color: #4e4e4e7d;
+    border-radius: 10px;
+}
+
+.nowplaying_movie_info{
+    color:white;
+    width: 160px;
+    height: 278px;
+    font-size: 0.9rem;
+    opacity: 0;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+.nowplaying_movie_info h3{
+    margin: 0;
+}
+
+.nowplaying_movie_info p{
+    margin: 0;
+}
+
+.nowplaying_left{
+    left: 5%;
+}
+
+.nowplaying_right{
+    right: 5%;
 }
 
 .upcoming_movies{
     overflow: hidden;
     width: 650px;
-    height: 400px;
     margin: 0 auto;
-    border: 1px solid black;
+    box-shadow: 3px 7px 6px 0px #808080bd;
 }
 
 .upcoming_movies_carousel{
@@ -33,7 +102,19 @@
 
 .upcoming_movie section{
     width: 465px;
-    height: 400px;
+    height: 278px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.upcoming_movie section p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    line-height: 1.3em;
 }
 
 .arrow{
@@ -41,16 +122,17 @@
     background-color: #8080807d;
     color: white;
     position: absolute;
-    top:50%;
+    top:47%;
     z-index: 1;
+    /* transform : translateY(-50%); */
 }
 
-.left{
-    left: 5%;
+.upcoming_left{
+    left: 15%;
 }
 
-.right{
-    right: 5%;
+.upcoming_right{
+    right: 15%;
 }
 
 .arrow:hover{
