@@ -3,39 +3,52 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Movie from "../../Movie/Movie";
 
-function MovieList({ title, date, poster, id, overview, rating }) {
-  const link = {
-    pathname: `/movie/${id} ${title}`,
-    state: {
-      id: id,
-      poster: poster,
-      title: title,
-      date: date,
-      overview: overview,
-      rating: rating,
-    },
-  };
+class MovieList extends React.Component {
 
-  return (
-    <div className="movie_list">
-      {poster === null ? (
-        <div className="null_poster"> </div>
-      ) : (
+  constructor(props){
+    super(props);
+
+  }
+
+  render(){
+
+    console.log(this.props.backdrop);
+    
+    return (
+
+    <Link to={{
+      pathname : `/movie/${this.props.id}/${this.props.title}`,
+      state : {
+        id : this.props.id,
+        poster : this.props.poster,
+        title : this.props.title,
+        date : this.props.date,
+        overview : this.props.overview,
+        rating : this.props.rating,
+        backdrop : this.props.backdrop,
+        popularity : this.props. popularity
+      }}}
+      style={{ textDecoration: 'none' }}>
+
+      <div className="movie_list">
+        {this.props.poster === null ? (
+        <div className="null_poster"> </div>) : (
         <img
-          src={"http://image.tmdb.org/t/p/w185" + poster}
-          alt={title}
-          title={title}
-        ></img>
-      )}
-      <div className="movie_info">
-        <Link to={link}>
-          <h3> {title} </h3>
-        </Link>
-        <p>{date}</p>
+          src={"http://image.tmdb.org/t/p/w185" + this.props.poster}
+          alt={this.props.title}
+          title={this.props.title}
+        />
+        )}
+        <div className="movie_info">
+          <h3> {this.props.title} </h3>
+          <p>{this.props.date}</p>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }
+  }
+  
 
 MovieList.propTypes = {
   id: PropTypes.number.isRequired,
