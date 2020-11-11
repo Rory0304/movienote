@@ -16,7 +16,7 @@ class Router extends React.Component {
         <Switch>
           <Route path="/" exact={true}><Home/></Route>
           <Route path="/upcoming" exact={true}><Upcoming/></Route>
-          <Route path="/movie" exact={true}><Movie/></Route>
+          <Route path="/movie" component={Movie}></Route>
         </Switch>
       <Footer />
       </>
