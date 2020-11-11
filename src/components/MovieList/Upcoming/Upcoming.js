@@ -1,66 +1,75 @@
 import React from "react";
 import MovieList from "./MovieList";
 import Axios from "axios";
+import {commonAPI, secretKey} from "../../../variable";
+import "./Upcoming.css";
 
 class Upcoming extends React.Component {
+
   constructor(props) {
     super(props);
 
     this.state = {
-      url:
-        "https://api.themoviedb.org/3/movie/upcoming?api_key=b1306395631dc84cde154096963c13db&region=US",
       page: 1,
       total_pages: 1,
-      db: [],
-      isloading: true,
+      upcomingList: [],
+      isLoading: true,
     };
-  }
 
-  getMovieList = async (page) => {
-    const new_url = this.state.url + "&page=" + page;
-    const { data } = await Axios.get(new_url);
-    this.setState({
-      url: new_url,
-      isloading: false,
-      db: data,
-      page: data.page,
-      total_pages: data.total_pages,
-    });
-  };
+    this.getupComingList = this.getupComingList.bind(this);
+  }
 
   componentDidMount() {
-    this.getMovieList(1);
+    this.getupComingList(1);
   }
 
+  getupComingList = async(page) => {
+    this.setState({isLoading: true});
+    try{
+      const upcoming_url = `${commonAPI}upcoming?api_key=${secretKey}&language=en-US&page=${page}`;
+      await Axios.get(upcoming_url)
+      .then(res => this.setState({total_pages : res.data.total_pages, upcomingList : res.data.results}))
+      .catch(e => console.log(e));
+    }catch(e){
+      return e;
+    }
+    this.setState({isLoading: false});
+  };
+
   render() {
-    const { page, total_pages, db, isloading } = this.state;
-    console.log(db.results);
+
+    const { page, total_pages, upcomingList, isLoading } = this.state;
 
     return (
       <div>
         <div className="movie_header">
-          <h2>Now Playing</h2>
-          <input className="searching" />
+          <h2>Upcoming</h2>
+          <input className="searching" placeholder="Searching" />
         </div>
-        {isloading ? <div>loading</div> : <GetEachMovie db={db} />}
+        {isLoading ? <div>loading</div> : <GetEachMovie upcomingList={upcomingList} />}
       </div>
     );
   }
 }
 
-function GetEachMovie({ db }) {
+
+function GetEachMovie({ upcomingList }) {
+
   return (
     <div className="movie_wrapper">
       <div className="movie_lists">
-        {db.results.map((movie) => (
+        {upcomingList.map((movie, index) => (
           <MovieList
             id={movie.id}
+            index={index}
             title={movie.title}
             key={movie.id}
             date={movie.release_date}
             overview={movie.overview}
             poster={movie.poster_path}
-            page={db.page}
+            backdrop={movie.backdrop_path}
+            popularity={movie.popularity}
+            page={upcomingList.page}
           />
         ))}
       </div>
