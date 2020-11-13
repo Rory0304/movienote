@@ -24,7 +24,7 @@ class Header extends React.Component{
       <FaList id="header_menu" onClick={this.showMenu}/>
       <nav className="submenu">
        <ul  ref={this.menu}>
-         <Link to="/>" style={{ textDecoration: 'none' }}>
+         <Link to="/nowplaying" style={{ textDecoration: 'none' }}>
            <li>Now Playing</li>
           </Link>
           <Link to="/upcoming" style={{ textDecoration: 'none' }}>
@@ -36,7 +36,7 @@ class Header extends React.Component{
           <Link to="/" style={{ textDecoration: 'none' }}>
            <li>Top Rated</li>
           </Link>
-          <Link to="/" style={{ textDecoration: 'none' }}>
+          <Link to="/mynote" style={{ textDecoration: 'none' }}>
            <li>My Note</li>
           </Link>
           <Link to="/" style={{ textDecoration: 'none' }}>

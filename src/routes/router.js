@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter, Route, Switch} from "react-router-dom";
 import Home from "../components/Home/Home";
+import MyNote from "../components/MyNote/Mynote";
 import Upcoming from "../components/MovieList/Upcoming/Upcoming";
+import NowPlaying from "../components/MovieList/NowPlaying/NowPlaying";
 import Movie from "../components/Movie/Movie";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
@@ -16,6 +18,8 @@ class Router extends React.Component {
         <Switch>
           <Route path="/" exact={true}><Home/></Route>
           <Route path="/upcoming" exact={true}><Upcoming/></Route>
+          <Route path="/nowplaying" exact={true}><NowPlaying/></Route>
+          <Route path="/mynote" exact={true}><MyNote/></Route>
           <Route path="/movie" component={Movie}></Route>
         </Switch>
       <Footer />
@@ -23,7 +27,7 @@ class Router extends React.Component {
     </BrowserRouter>
   );
   }
-  
+
 }
 
 export default Router;

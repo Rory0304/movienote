@@ -2,9 +2,8 @@ import React from "react";
 import MovieList from "../MovieList";
 import Axios from "axios";
 import {commonAPI, secretKey} from "../../../variable";
-import "./Upcoming.css";
 
-class Upcoming extends React.Component {
+class NowPlaying extends React.Component {
 
   constructor(props) {
     super(props);
@@ -26,7 +25,7 @@ class Upcoming extends React.Component {
   getupComingList = async(page) => {
     this.setState({isLoading: true});
     try{
-      const upcoming_url = `${commonAPI}upcoming?api_key=${secretKey}&language=en-US&page=${page}`;
+      const upcoming_url = `${commonAPI}now_playing?api_key=${secretKey}&language=en-US&page=${page}`;
       await Axios.get(upcoming_url)
       .then(res => this.setState({total_pages : res.data.total_pages, upcomingList : res.data.results}))
       .catch(e => console.log(e));
@@ -37,13 +36,12 @@ class Upcoming extends React.Component {
   };
 
   render() {
-
     const { page, total_pages, upcomingList, isLoading } = this.state;
 
     return (
       <div>
         <div className="movie_header">
-          <h2>Upcoming</h2>
+          <h2>Now Playing</h2>
           <input className="searching" placeholder="Searching" />
         </div>
         {isLoading ? <div>loading</div> : <GetEachMovie upcomingList={upcomingList} />}
@@ -52,9 +50,7 @@ class Upcoming extends React.Component {
   }
 }
 
-
 function GetEachMovie({ upcomingList }) {
-
   return (
     <div className="movie_wrapper">
       <div className="movie_lists">
@@ -77,7 +73,7 @@ function GetEachMovie({ upcomingList }) {
         <button>load more</button>
       </div>
     </div>
-  );
-}
+    );
+  }
 
-export default Upcoming;
+export default NowPlaying;
