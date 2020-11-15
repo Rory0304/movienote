@@ -1,5 +1,5 @@
 import React  from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {FaList} from "react-icons/fa";
 
 class Header extends React.Component{
@@ -48,8 +48,7 @@ class Header extends React.Component{
         <h1>Movie Note.</h1>
       </Link>
       <div className="userinfo">
-        <button>Login</button>
-        <button>Sign up</button>
+        {this.props.isLogin ? <button onClick={this.props.onLogOut}>Logout</button> : <Link to="/login" style={{ textDecoration: 'none' }}><button>Login</button></Link>}
       </div>
     </div>
  );}
