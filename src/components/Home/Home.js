@@ -3,6 +3,7 @@ import Axios from "axios";
 import "./Home.css";
 import {commonAPI, secretKey} from "../../variable";
 import {FaChevronRight, FaChevronLeft} from "react-icons/fa";
+import { average } from 'color.js'
 
 class Home extends React.Component {
 
@@ -14,6 +15,7 @@ class Home extends React.Component {
       nowPlayingList : [],
       upComingCurrent : 0,
       nowPlayingCurrent : 0,
+      popularCurrent : 0
     }
 
     this.getPopularList = this.getPopularList.bind(this);
@@ -22,8 +24,10 @@ class Home extends React.Component {
     
     this.totalSlides = 5;
     this.nowplayingTotalSlides = 3;
+    this.popularTotalSlides = 5;
     this.upcomingCarousel = React.createRef();
     this.nowplayingCarousel = React.createRef();
+    this.popularCarousel = React.createRef();
 
   }
 
@@ -31,13 +35,15 @@ class Home extends React.Component {
     this.getPopularList();
     this.getupComingList();
     this.getNowplayingList();
+    this.intervalId = setInterval(this.popularAutoSlider, 3000);
   }
 
   getPopularList = async() => {
     try{
       const popular_url = `${commonAPI}popular?api_key=${secretKey}&language=en-US&page=1`;
       await Axios.get(popular_url)
-      .then(res => this.setState({popularList : res.data.results.slice(0,5)}))
+      .then(res => this.setState({popularList : res.data.results.slice(0,6)}))
+      .then(res => this.setState({popularList : this.state.popularList.concat(this.state.popularList.slice(0,1))}))
       .catch(e => console.log(e));
     }
     catch(e){
@@ -68,21 +74,35 @@ class Home extends React.Component {
     }
   };
 
+  popularAutoSlider = () => {
+    if(this.state.popularCurrent === this.popularTotalSlides -1){
+      this.setState({popularCurrent : 0}, function(){
+        this.moveSlide("popular");
+      });
+    }
+    else{
+      this.setState({popularCurrent : this.state.popularCurrent + 1},function(){
+        this.moveSlide("popular");
+      });
+    }
+    
+  }
 
   moveSlide = (props) => {
-
-
     if(props === "upcoming"){
       const size = this.upcomingCarousel.current.clientWidth;
       this.upcomingCarousel.current.style.transition = "transform 0.4s ease-in-out";
       this.upcomingCarousel.current.style.transform = "translateX(" + (-size * this.state.upComingCurrent) + "px)";
     }
-    else{
+    else if(props === "nowplaying"){
       const size = this.nowplayingCarousel.current.clientWidth;
       this.nowplayingCarousel.current.style.transition = "transform 0.4s ease-in-out";
       this.nowplayingCarousel.current.style.transform = "translateX(" + (-size * this.state.nowPlayingCurrent) + "px)";
     }
-    
+    else{
+      this.popularCarousel.current.style.transition = "transform 0.4s ease-in-out";
+      this.popularCarousel.current.style.transform = "translateX(" + (-495 * this.state.popularCurrent)  + "px)";
+    }
   }
 
 
@@ -148,12 +168,11 @@ class Home extends React.Component {
   render(){
     let popularList = this.state.popularList;
     let upComingList = this.state.upComingList;
-    let nowPlayingList = this.state.nowPlayingList;
-    
+    let nowPlayingList = this.state.nowPlayingList;    
     return(
     <div>
-      <div className="popular_area">
-        {popularList.map((list) => <PopularArea list={list} key={list.id} />)}
+      <div className="popular_area" ref={this.popularCarousel}>
+          {popularList.map((list) => <PopularArea list={list} key={list.id} />)}
       </div>
       <div className="nowplaying_area">
         <h2>Now Playing</h2>
@@ -181,20 +200,45 @@ class Home extends React.Component {
   }
 }
 
-function PopularArea({list}){
-  const poster_path = "http://image.tmdb.org/t/p/w185" + list.poster_path;
-  return(
-    <div className="popular_movie">
-      <img alt={list.title} src={poster_path}/>
-      <h3>{list.title}</h3>
-      <p>{list.release_date}</p>
-      <p>{list.overview}</p>
-      <div>See the movie</div>
-    </div>
-  )
+class PopularArea extends React.Component{
+  
+  constructor({props}){
+    super(props);
+    this.state = {
+      backgroundColor : "",
+      poster_path : ""
+    }
 
+    this.getBackgroundRsc = this.getBackgroundRsc.bind(this);
+  }
+
+  componentDidMount(){
+    this.getBackgroundRsc();
+  }
+
+  getBackgroundRsc = () => {
+    const poster_path = "http://image.tmdb.org/t/p/w185" + this.props.list.poster_path;
+    this.setState({poster_path : poster_path});
+    average(poster_path,  { format: 'hex' }).then(color => { this.setState({backgroundColor : color})});
+  }
+
+  render(){
+    let {list} = this.props;
+    return(
+      <div className="popular_movie" style={{backgroundColor:this.state.backgroundColor}}>
+        <img alt={list.title} src={this.state.poster_path}/>
+        <section className="popular_movie_info">
+          <h3>{list.title}</h3>
+          <p>{list.release_date}</p>
+          <p className="popular_movie_overview">{list.overview}</p>
+          <span style={{color: this.state.backgroundColor}}>See the movie</span>
+        </section>
+      </div>
+    )
+  }
 }
 
+/* class component로 바꿉시다! */
 function NowPlayingArea({list}){
   const poster_path = `url(http://image.tmdb.org/t/p/w185${list.poster_path})`;
   return(
@@ -212,7 +256,6 @@ class UpcomingArea extends React.Component{
 
   render(){
     const list = this.props.list;
-    const index = this.props.index;
     const poster_path = "http://image.tmdb.org/t/p/w185" + list.poster_path;
 
     return(
