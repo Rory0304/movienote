@@ -12,7 +12,11 @@ class MovieList extends React.Component {
 
   render(){
 
-    console.log(this.props.backdrop);
+    if(this.props.isLoaindg){
+      return(
+        <div className="movie_list">loading</div>
+      )
+    }
 
     return (
 
