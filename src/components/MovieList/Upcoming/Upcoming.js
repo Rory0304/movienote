@@ -2,7 +2,7 @@ import React from "react";
 import MovieList from "../MovieList";
 import Axios from "axios";
 import {commonAPI, secretKey} from "../../../variable";
-import "./Upcoming.css";
+import "../MovieList.css";
 
 class Upcoming extends React.Component {
 
@@ -17,10 +17,12 @@ class Upcoming extends React.Component {
     };
 
     this.getupComingList = this.getupComingList.bind(this);
+    this.infiniteScroll = this.infiniteScroll.bind(this);
   }
 
   componentDidMount() {
     this.getupComingList(1);
+    window.addEventListener('scroll',this.infiniteScroll, true);
   }
 
   getupComingList = async(page) => {
@@ -28,13 +30,29 @@ class Upcoming extends React.Component {
     try{
       const upcoming_url = `${commonAPI}upcoming?api_key=${secretKey}&language=en-US&page=${page}`;
       await Axios.get(upcoming_url)
-      .then(res => this.setState({total_pages : res.data.total_pages, upcomingList : res.data.results}))
+      .then(res => {
+        const fetchData = res.data.results;
+        this.setState({page : page, total_pages : res.data.total_pages, upcomingList : [...this.state.upcomingList, ...fetchData]})
+      })
       .catch(e => console.log(e));
     }catch(e){
       return e;
     }
     this.setState({isLoading: false});
   };
+
+  infiniteScroll(){
+    let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+    let clientHeight = document.documentElement.clientHeight;
+
+    if(scrollHeight === (clientHeight + scrollTop)){
+      const {page, total_pages} = this.state;
+      if(page <= total_pages){
+        this.getupComingList(page + 1);
+      }
+    }
+  }
 
   render() {
 
@@ -46,18 +64,19 @@ class Upcoming extends React.Component {
           <h2>Upcoming</h2>
           <input className="searching" placeholder="Searching" />
         </div>
-        {isLoading ? <div>loading</div> : <GetEachMovie upcomingList={upcomingList} />}
+        <GetEachMovie upcomingList={upcomingList} isLoading={isLoading} />
       </div>
     );
   }
 }
 
 
-function GetEachMovie({ upcomingList }) {
+function GetEachMovie({ upcomingList, isLoading }) {
 
   return (
     <div className="movie_wrapper">
       <div className="movie_lists">
+
         {upcomingList.map((movie, index) => (
           <MovieList
             id={movie.id}
@@ -70,11 +89,9 @@ function GetEachMovie({ upcomingList }) {
             backdrop={movie.backdrop_path}
             popularity={movie.popularity}
             page={upcomingList.page}
+            isLoading={isLoading}
           />
         ))}
-      </div>
-      <div className="movie_load">
-        <button>load more</button>
       </div>
     </div>
   );
