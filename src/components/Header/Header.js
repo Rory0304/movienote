@@ -27,11 +27,11 @@ class Header extends React.Component{
          <Link to="/nowplaying" style={{ textDecoration: 'none' }}>
            <li>Now Playing</li>
           </Link>
-          <Link to="/upcoming" style={{ textDecoration: 'none' }}>
-           <li>Upcoming</li>
-          </Link>
           <Link to="/toprated" style={{ textDecoration: 'none' }}>
            <li>Top Rated</li>
+          </Link>
+          <Link to="/upcoming" style={{ textDecoration: 'none' }}>
+           <li>Upcoming</li>
           </Link>
           <Link to="/mynote" style={{ textDecoration: 'none' }}>
            <li>My Note</li>

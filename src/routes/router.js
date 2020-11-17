@@ -10,6 +10,7 @@ import Footer from "../components/Footer/Footer";
 import Login from "../components/Login/Login";
 import "../components/common.css";
 import Toprated from "../components/MovieList/TopRated/Toprated";
+import Movie from "../components/Movie/Movie";
 
 class Router extends React.Component {
 
@@ -51,12 +52,12 @@ class Router extends React.Component {
       <Header isLogin={isLogin} onLogOut={onLogOut}/>
         <Switch>
           <Route path="/" exact={true}><Home/></Route>
-          <Route path="/upcoming" exact={true}><Upcoming/></Route>
           <Route path="/toprated" exact={true}><Toprated/></Route>
           <Route path="/nowplaying" exact={true}><NowPlaying/></Route>
+          <Route path="/upcoming" exact={true}><Upcoming/></Route>
           <Route path="/mynote" exact={true}><MyNote/></Route>
           <Route path="/login" component={Login} onLogin={onLogin}></Route>
-
+          <Route path="/movie" component={Movie}></Route>
         </Switch>
       <Footer />
       </>
