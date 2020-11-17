@@ -30,17 +30,11 @@ class Header extends React.Component{
           <Link to="/upcoming" style={{ textDecoration: 'none' }}>
            <li>Upcoming</li>
           </Link>
-          <Link to="/" style={{ textDecoration: 'none' }}>
-           <li>Popular</li>
-          </Link>
           <Link to="/toprated" style={{ textDecoration: 'none' }}>
            <li>Top Rated</li>
           </Link>
           <Link to="/mynote" style={{ textDecoration: 'none' }}>
            <li>My Note</li>
-          </Link>
-          <Link to="/" style={{ textDecoration: 'none' }}>
-           <li>Article</li>
           </Link>
         </ul>
       </nav>

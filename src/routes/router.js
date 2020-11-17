@@ -5,12 +5,11 @@ import Home from "../components/Home/Home";
 import MyNote from "../components/MyNote/Mynote";
 import Upcoming from "../components/MovieList/Upcoming/Upcoming";
 import NowPlaying from "../components/MovieList/NowPlaying/NowPlaying";
-import Movie from "../components/Movie/Movie";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Login from "../components/Login/Login";
 import "../components/common.css";
-import Toprated from "../components/MovieList/TopRated/TopRated";
+import Toprated from "../components/MovieList/TopRated/Toprated";
 
 class Router extends React.Component {
 
@@ -56,7 +55,6 @@ class Router extends React.Component {
           <Route path="/toprated" exact={true}><Toprated/></Route>
           <Route path="/nowplaying" exact={true}><NowPlaying/></Route>
           <Route path="/mynote" exact={true}><MyNote/></Route>
-          <Route path="/movie" component={Movie}></Route>
           <Route path="/login" component={Login} onLogin={onLogin}></Route>
 
         </Switch>
